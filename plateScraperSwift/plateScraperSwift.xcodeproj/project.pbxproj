@@ -71,11 +71,11 @@
 				22B2CC7726B77F0C003A0E2D /* Models */,
 				22B2CC7826B77F15003A0E2D /* Views */,
 				22B2CC7A26B77F22003A0E2D /* Controllers */,
+				22C0BA9E26B863BB00D9534F /* Constants.swift */,
 				2200D06726B7585500DD4E6E /* AppDelegate.swift */,
 				2200D06926B7585500DD4E6E /* SceneDelegate.swift */,
 				2200D07026B7585600DD4E6E /* Assets.xcassets */,
 				2200D07526B7585600DD4E6E /* Info.plist */,
-				22C0BA9E26B863BB00D9534F /* Constants.swift */,
 			);
 			path = plateScraperSwift;
 			sourceTree = "<group>";

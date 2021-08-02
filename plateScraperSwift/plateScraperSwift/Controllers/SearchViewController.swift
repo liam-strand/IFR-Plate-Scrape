@@ -20,11 +20,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func searchButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: K.SegueIDs.SearchView, sender: self)
+        performSegue(withIdentifier: K.SegueIDs.ListView, sender: self)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        performSegue(withIdentifier: K.SegueIDs.SearchView, sender: self)
+        performSegue(withIdentifier: K.SegueIDs.ListView, sender: self)
         return true
     }
     
@@ -34,6 +34,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
             destination.plateElements = requestManager.createArray(airport: searchBox.text ?? "")
             destination.plateTableView.reloadData()
             destination.title = searchBox.text ?? ""
+            if K.Debug.printSearch { print(searchBox.text ?? "no text") }
         }
     }
 

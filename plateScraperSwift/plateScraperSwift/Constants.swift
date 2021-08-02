@@ -10,8 +10,8 @@ import Foundation
 struct K {
     
     struct Debug {
-        static let printPlateList = true
-        static let printPDFLink = true
+        static let printPlateList = false
+        static let printPDFLink = false
         static let printSearch = true
         static let printSearchURL = true
     }

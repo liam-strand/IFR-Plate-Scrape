@@ -17,7 +17,7 @@ class RequestManager {
         do {
             let url = URL(string: K.URLs.airportLookupBeginning + airport + K.URLs.airportLookupEnd) ?? URL(string: K.URLs.origin)!
             
-            if K.Debug.printSearchURL { print(url.absoluteString) }
+            if K.Debug.printSearchURL { print(url) }
             
             let html = try String(contentsOf: url, encoding: String.Encoding.ascii)
             
