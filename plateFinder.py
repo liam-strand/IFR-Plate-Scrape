@@ -57,15 +57,19 @@ def commandLoop(plateObjects):
 
     while shouldContinue:
 
-        inputString = input("Plate, Airport, or quit: ")
+        inputString = input("Plate #, Airport code, print or quit: ")
 
         if fileExists != -1:
-            print("deleting", fileExists)
             os.system("rm \"{}\".pdf".format(plateObjects[fileExists].text.replace("/", "-")))
+
+            print("deleting", plateObjects[fileExists].text.replace("/", "-"))
+
             fileExists = -1
 
         if (inputString == "q" or inputString == "quit"):
             shouldContinue = False
+        elif (inputString == "p" or inputString == "print"):
+            printAvailablePlates(plateObjects)
         elif inputString.isdigit() and (int(inputString) < len(plateObjects)):
             downloadPlate(plateObjects[int(inputString)])
             openPlate(plateObjects[int(inputString)])
