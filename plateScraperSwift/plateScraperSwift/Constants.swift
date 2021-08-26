@@ -12,8 +12,9 @@ struct K {
     struct Debug {
         static let printPlateList = false
         static let printPDFLink = false
-        static let printSearch = true
-        static let printSearchURL = true
+        static let printSearch = false
+        static let printSearchURL = false
+        static let printCycle = false
     }
     
     struct SegueIDs {
@@ -26,17 +27,12 @@ struct K {
         static let plateCell = "PlateCell"
     }
     
-    struct URLs {
-        static let origin = "https://flightaware.com"
-        static let airportLookupBeginning = "https://flightaware.com/resources/airport/"
-        static let airportLookupEnd = "/procedures"
-        static let pdfEnd = "/pdf"
-    }
-    
     struct HTMLData {
-        static let dataColumns = "medium-1 columns"
-        static let rowTag = "a"
+        static let cycleSelector = "option"
+        static let cycleData = "value"
+        static let rowTag = "tr"
         static let linkAttr = "href"
+        static let compare = " Compare"
     }
     
     static let startupTitle = "Tap on the search icon to request an airport's plates"

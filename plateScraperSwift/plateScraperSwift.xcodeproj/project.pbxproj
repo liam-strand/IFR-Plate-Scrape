@@ -15,6 +15,7 @@
 		2200D07426B7585600DD4E6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2200D07226B7585600DD4E6E /* LaunchScreen.storyboard */; };
 		2200D07F26B758A400DD4E6E /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 2200D07E26B758A400DD4E6E /* SwiftSoup */; };
 		227856F326B892530047B7B4 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227856F226B892530047B7B4 /* RequestManager.swift */; };
+		229D0C2326D829580001B33C /* Plate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D0C2226D829580001B33C /* Plate.swift */; };
 		22B2CC7C26B7823B003A0E2D /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B2CC7B26B7823B003A0E2D /* ListViewController.swift */; };
 		22B2CC7E26B787A4003A0E2D /* PlateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B2CC7D26B787A4003A0E2D /* PlateCell.swift */; };
 		22C0BA9D26B8590200D9534F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C0BA9C26B8590200D9534F /* SearchViewController.swift */; };
@@ -31,6 +32,7 @@
 		2200D07326B7585600DD4E6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2200D07526B7585600DD4E6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		227856F226B892530047B7B4 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
+		229D0C2226D829580001B33C /* Plate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plate.swift; sourceTree = "<group>"; };
 		22B2CC7B26B7823B003A0E2D /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		22B2CC7D26B787A4003A0E2D /* PlateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlateCell.swift; sourceTree = "<group>"; };
 		22C0BA9C26B8590200D9534F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				227856F226B892530047B7B4 /* RequestManager.swift */,
+				229D0C2226D829580001B33C /* Plate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -93,6 +96,7 @@
 			children = (
 				2200D07226B7585600DD4E6E /* LaunchScreen.storyboard */,
 				2200D06D26B7585500DD4E6E /* Main.storyboard */,
+				22B2CC7D26B787A4003A0E2D /* PlateCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -103,7 +107,6 @@
 				2200D06B26B7585500DD4E6E /* PDFViewController.swift */,
 				22B2CC7B26B7823B003A0E2D /* ListViewController.swift */,
 				22C0BA9C26B8590200D9534F /* SearchViewController.swift */,
-				22B2CC7D26B787A4003A0E2D /* PlateCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22C0BA9D26B8590200D9534F /* SearchViewController.swift in Sources */,
+				229D0C2326D829580001B33C /* Plate.swift in Sources */,
 				22B2CC7E26B787A4003A0E2D /* PlateCell.swift in Sources */,
 				2200D06C26B7585500DD4E6E /* PDFViewController.swift in Sources */,
 				227856F326B892530047B7B4 /* RequestManager.swift in Sources */,

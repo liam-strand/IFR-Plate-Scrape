@@ -10,73 +10,73 @@ import SwiftSoup
 
 class RequestManager {
     
-    func createArray(airport: String) -> [Element] {
+    func getCycle() -> Int {
+        let url = URL(string: "https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/search/")!
         
-        var plates: [Element] = []
+        var cycle = 2108
         
         do {
-            let url = URL(string: K.URLs.airportLookupBeginning + airport + K.URLs.airportLookupEnd) ?? URL(string: K.URLs.origin)!
+            let html = try String(contentsOf: url, encoding: String.Encoding.ascii)
             
-            if K.Debug.printSearchURL { print(url) }
+            let doc: Document = try SwiftSoup.parse(html)
+            
+            let cycleOptions: Elements = try doc.getElementsByTag(K.HTMLData.cycleSelector)
+            
+            let cycleObject: Element = cycleOptions[0]
+            
+            if K.Debug.printCycle { print(try cycleObject.attr(K.HTMLData.cycleData)) }
+            
+            cycle = Int(try cycleObject.attr(K.HTMLData.cycleData)) ?? 2108
+            
+        } catch Exception.Error(type: let type, Message: let message) {
+            print(type)
+            print(message)
+        } catch {
+            print("oof")
+        }
+        
+        return cycle
+    }
+    
+    func createArray(cycle: Int, airport: String) -> [Plate] {
+        
+        var plates: [Plate] = []
+        
+        do {
+            let url = URL(string: "https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/search/results/?cycle=\(cycle)&ident=\(airport)&sort=proc&dir=asc")!
+            
+            if K.Debug.printSearchURL{ print(url) }
             
             let html = try String(contentsOf: url, encoding: String.Encoding.ascii)
             
             let doc: Document = try SwiftSoup.parse(html)
             
-            let blocks = try doc.getElementsByClass(K.HTMLData.dataColumns)
+            let table = try doc.getElementsByTag(K.HTMLData.rowTag)
             
-            for block in blocks {
-                plates.append(contentsOf: try block.getElementsByTag(K.HTMLData.rowTag))
+            
+            for row in table {
+                let plateObject: Elements = try row.getElementsByAttribute(K.HTMLData.linkAttr)
+                
+                let newPlate = Plate(name: (try plateObject.text().replacingOccurrences(of: K.HTMLData.compare, with: "")),
+                                     link: try URL(string: plateObject.attr(K.HTMLData.linkAttr))!)
+                
+                plates.append(newPlate)
             }
-            
-            if K.Debug.printPlateList {
-                for plate in plates {
-                    print(try plate.text())
-                }
-            }
-            
         } catch Exception.Error(type: let type, Message: let message) {
             print(type)
             print(message)
         } catch {
             print("oof")
         }
+        
+        plates.remove(at: 0)
+                
+        if K.Debug.printSearch {
+            for plate in plates {
+                print("\(plate.name) : \(plate.link)")
+            }
+        }
+        
         return plates
     }
-    
-    func getPDFLink(_ requestedPlate: Element?) -> URL {
-        do {
-            
-            let linkExtension: String = try requestedPlate!.attr(K.HTMLData.linkAttr)
-            
-            let newURL: URL = URL(string: K.URLs.origin + linkExtension + K.URLs.pdfEnd)!
-            
-            if K.Debug.printPDFLink { print(newURL) }
-            
-            return newURL
-            
-        } catch Exception.Error(type: let type, Message: let message) {
-            print(type)
-            print(message)
-        } catch {
-            print("oof")
-        }
-        return URL(string: K.URLs.origin)!
-    }
-    
-    func getText(_ object: Element) -> String {
-        
-        do {
-            return try object.text()
-        } catch Exception.Error(type: let type, Message: let message) {
-            print(type)
-            print(message)
-        } catch {
-            print("oof")
-        }
-        
-        return ""
-        
-    }
-    
 }

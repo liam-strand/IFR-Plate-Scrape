@@ -12,7 +12,7 @@ class ListViewController: UIViewController {
     
     @IBOutlet weak var plateTableView: UITableView!
     
-    var plateElements: [Element] = []
+    var plateElements: [Plate] = []
     var search: String = ""
     
     override func viewDidLoad() {

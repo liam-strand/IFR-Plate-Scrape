@@ -31,7 +31,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ListViewController {
             destination.search = searchBox.text ?? ""
-            destination.plateElements = requestManager.createArray(airport: searchBox.text ?? "")
+            destination.plateElements = requestManager.createArray(cycle: requestManager.getCycle(), airport: searchBox.text ?? "")
             destination.plateTableView.reloadData()
             destination.title = searchBox.text ?? ""
             if K.Debug.printSearch { print(searchBox.text ?? "no text") }

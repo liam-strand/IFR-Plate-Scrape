@@ -13,7 +13,7 @@ class PDFViewController: UIViewController {
     
     let requestManager = RequestManager()
     
-    var requestedPlate: Element?
+    var requestedPlate: Plate?
     var airportCode: String = ""
     
     override func viewDidLoad() {
@@ -21,9 +21,9 @@ class PDFViewController: UIViewController {
         
         let pdfView = setupPDFView()
         
-        self.title = airportCode + ": " +  requestManager.getText(requestedPlate!)
+        self.title = airportCode + ": " +  requestedPlate!.name
         
-        let url = requestManager.getPDFLink(requestedPlate)
+        let url = requestedPlate!.link
         
         pdfView.document = PDFDocument(url: url)
 

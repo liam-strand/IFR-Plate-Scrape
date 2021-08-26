@@ -2,27 +2,46 @@ import requests
 from bs4 import BeautifulSoup
 import cmd
 import os
-import time
 
-originURL = "https://flightaware.com"
+originURL = "https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/search/results/"
+
+
+c = requests.get("https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/search/")
+soup = BeautifulSoup(c.content, "html.parser")
+
+cycleOptions = soup.find_all("option")
+
+cycleValues = []
+
+for option in cycleOptions:
+    cycleValues.append(int(option.get("value")))
+
+cycle = cycleValues[0]
 
 def makeURL(airportCode):
 
-    return originURL + "/resources/airport/" + airportCode + "/procedures"
+    return originURL + f"?cycle={cycle}&ident={airportCode}&sort=proc&dir=asc"
 
 def getPlateObjects(url):
 
     r = requests.get(url)
     soup = BeautifulSoup(r.content, "html.parser")
 
-    terminalBlocks = soup.find_all(attrs={"class": "medium-1 columns"})
+    table = soup.find_all("tbody")[0]
+
+    rows = table.find_all("tr")
 
     plateObjects = []
 
-    for i in range(len(terminalBlocks)):
-        for j in terminalBlocks[i].find_all("a"):
-            plateObjects.append(j)
-    
+    for row in rows:
+        linkedItems = row.find_all("a", href=True)
+        for link in linkedItems:
+            plateObjects.append(link)
+
+    for o in plateObjects:
+        if o.text == "Compare":
+            plateObjects.remove(o)
+
     return plateObjects
 
 def printAvailablePlates(plateObjects):
@@ -38,9 +57,7 @@ def printAvailablePlates(plateObjects):
 
 def downloadPlate(requestedPlate):
 
-    newURL = originURL + requestedPlate["href"] + "/pdf"
-
-    response = requests.get(newURL)
+    response = requests.get(requestedPlate["href"])
 
     with open(requestedPlate.text.replace("/", "-") + '.pdf', 'wb') as f:
         f.write(response.content)
