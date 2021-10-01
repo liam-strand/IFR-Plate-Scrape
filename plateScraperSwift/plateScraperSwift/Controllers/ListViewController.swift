@@ -4,7 +4,7 @@
 //
 //  Created by Liam Strand on 8/1/21.
 //
-
+/*
 import UIKit
 import SwiftSoup
 
@@ -70,3 +70,4 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
+*/
