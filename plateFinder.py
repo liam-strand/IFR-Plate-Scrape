@@ -1,12 +1,14 @@
-import requests
 from bs4 import BeautifulSoup
+import requests
 import cmd
 import os
 
 originURL = "https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/search/results/"
 
 
-c = requests.get("https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/search/")
+c = requests.get(
+    "https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/search/"
+)
 soup = BeautifulSoup(c.content, "html.parser")
 
 cycleOptions = soup.find_all("option")
@@ -18,9 +20,11 @@ for option in cycleOptions:
 
 cycle = cycleValues[0]
 
+
 def makeURL(airportCode):
 
     return originURL + f"?cycle={cycle}&ident={airportCode}&sort=proc&dir=asc"
+
 
 def getPlateObjects(url):
 
@@ -44,27 +48,30 @@ def getPlateObjects(url):
 
     return plateObjects
 
+
 def printAvailablePlates(plateObjects):
-    
+
     printList = []
-    
+
     for i in range(len(plateObjects)):
-        printList.append("{} {}".format(str(i),plateObjects[i].text))
+        printList.append("{} {}".format(str(i), plateObjects[i].text))
 
     print("AVAILABLE PLATES:")
     cli = cmd.Cmd()
     cli.columnize(printList, displaywidth=80)
 
+
 def downloadPlate(requestedPlate):
 
     response = requests.get(requestedPlate["href"])
 
-    with open(requestedPlate.text.replace("/", "-") + '.pdf', 'wb') as f:
+    with open(requestedPlate.text.replace("/", "-") + ".pdf", "wb") as f:
         f.write(response.content)
+
 
 def openPlate(requestedPlate):
     print("Opening {}.pdf".format(requestedPlate.text.replace("/", "-")))
-    os.system("open \"{}\".pdf".format(requestedPlate.text.replace("/", "-")))
+    os.system('open "{}".pdf'.format(requestedPlate.text.replace("/", "-")))
 
 
 def commandLoop(plateObjects):
@@ -77,15 +84,17 @@ def commandLoop(plateObjects):
         inputString = input("Plate #, Airport code, print or quit: ")
 
         if fileExists != -1:
-            os.system("rm \"{}\".pdf".format(plateObjects[fileExists].text.replace("/", "-")))
+            os.system(
+                'rm "{}".pdf'.format(plateObjects[fileExists].text.replace("/", "-"))
+            )
 
             print("deleting", plateObjects[fileExists].text.replace("/", "-"))
 
             fileExists = -1
 
-        if (inputString == "q" or inputString == "quit"):
+        if inputString == "q" or inputString == "quit":
             shouldContinue = False
-        elif (inputString == "p" or inputString == "print"):
+        elif inputString == "p" or inputString == "print":
             printAvailablePlates(plateObjects)
         elif inputString.isdigit() and (int(inputString) < len(plateObjects)):
             downloadPlate(plateObjects[int(inputString)])
@@ -98,6 +107,7 @@ def commandLoop(plateObjects):
             print("Invalid input")
 
         print("----------------------")
+
 
 startingAirport = input("Airport: ")
 
