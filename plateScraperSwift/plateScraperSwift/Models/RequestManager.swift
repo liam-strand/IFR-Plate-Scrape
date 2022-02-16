@@ -69,7 +69,7 @@ class RequestManager {
             print("oof")
         }
         print("7")
-        plates.remove(at: 0)
+//        plates.remove(at: 0)
                 
         if K.Debug.printSearch {
             for plate in plates {
