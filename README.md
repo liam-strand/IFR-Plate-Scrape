@@ -14,7 +14,7 @@ There are three major components in this repository:
 
 ### Usage: 
     
-    ./plate_finder.py
+    python[3] plate_finder.py
 
 
 ### Does the following:
