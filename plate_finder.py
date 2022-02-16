@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 A CLI that interactively searches for, downloads, and opens IFR plates
 for airports.
